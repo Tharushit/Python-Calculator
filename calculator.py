@@ -1,3 +1,5 @@
+previous_operations=[]
+
 def add(a, b):
     return float(a + b)
 
@@ -20,6 +22,12 @@ def power(a, b):
 def remainder(a, b):
     return a % b
 
+def history():
+    if len(previous_operations) == 0:
+        print("No past calculations to show")
+    else:
+        for i, operation in enumerate(previous_operations, start=1):
+            print(f"{operation}")
 
 
 def select_op(choice):
@@ -40,6 +48,10 @@ def select_op(choice):
     elif choice == '$':
         print("Resetting")
         return None
+    elif choice == '?':
+        history()
+        return None
+    
     else:
         print("Unrecognized operation")
         return None
