@@ -13,3 +13,31 @@ def divide(a, b):
     else:
         print("float division by zero")
         return None
+    
+def power(a, b):
+    return a ** b
+
+def remainder(a, b):
+    return a % b
+
+def select_op(choice):
+    if choice == '+':
+        return add
+    elif choice == '-':
+        return subtract
+    elif choice == '*':
+        return multiply
+    elif choice == '/':
+        return divide
+    elif choice == '^':
+        return power
+    elif choice == '%':
+        return remainder
+    elif choice == '#':
+        return None
+    elif choice == '$':
+        print("Resetting")
+        return None
+    else:
+        print("Unrecognized operation")
+        return None
