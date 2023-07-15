@@ -30,31 +30,72 @@ def history():
             print(f"{operation}")
 
 
+
 def select_op(choice):
-    if choice == '+':
-        return add
-    elif choice == '-':
-        return subtract
-    elif choice == '*':
-        return multiply
-    elif choice == '/':
-        return divide
-    elif choice == '^':
-        return power
-    elif choice == '%':
-        return remainder
-    elif choice == '#':
-        return None
-    elif choice == '$':
-        print("Resetting")
-        return None
-    elif choice == '?':
+  if (choice == '#'):
+    return -1
+  elif (choice == '$'):
+    return 0
+  elif choice == '?':
         history()
         return None
+  elif (choice in ('+','-','*','/','^','%')):
+    while (True):
+      num1s = str(input("Enter first number: "))
+      print(num1s)
+      if num1s.endswith('$'):
+        return 0
+      if num1s.endswith('#'):
+        return -1
+        
+      try:
+        num1 = float(num1s)
+        break
+      except:
+        print("Not a valid number,please enter again")
+        continue
     
+    while (True):
+      num2s = str(input("Enter second number: "))
+      print(num2s)
+      if num2s.endswith('$'):
+        return 0
+      if num2s.endswith('#'):
+        return -1
+      try:  
+        num2 = float(num2s)
+        break
+      except:
+        print("Not a valid number,please enter again")
+        continue
+    
+    result = 0.0
+    last_calculation = ""
+    if choice == '+':
+      result = add(num1, num2)
+    elif choice == '-':
+      result = subtract(num1, num2)
+    elif choice == '*':
+      result = multiply(num1, num2)
+    elif choice == '/':
+      result =  divide(num1, num2)
+    elif choice == '^':
+      result = power(num1, num2)
+    elif choice == '%':
+      result = remainder(num1, num2)
+    elif choice == '?':
+      result = history()
     else:
-        print("Unrecognized operation")
-        return None
+      print("Something Went Wrong")
+      
+    last_calculation =  "{0} {1} {2} = {3}".format(num1, choice, num2, result)
+    previous_operations.append(last_calculation)
+    print(last_calculation )
+    
+    
+  else:
+     print("Unrecognized operation")
+     return None
     
 
 while True:
@@ -67,6 +108,7 @@ while True:
     print("6.Remainder: % ")
     print("7.Terminate: # ")
     print("8.Reset    : $ ")
+    print("9.History  : ? ")
 
     choice = input("Enter choice(+,-,*,/,^,%,#,$): ")
     print(choice)
